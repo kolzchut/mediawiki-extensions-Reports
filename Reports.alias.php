@@ -9,7 +9,7 @@ $specialPageAliases['en'] = [
 
 /** Hebrew (עברית) */
 $specialPageAliases['he'] = [
-	'ArticlesUpdatesReport' => [ 'דו"ח שינויים בדפים' ],
+	'ArticlesUpdatesReport' => [ 'דו"ח עדכוני ערכים' ],
 ];
 
 /** Arabic (العربية) */
