@@ -1,0 +1,43 @@
+{
+	"name": "Reports",
+	"version": "0.1.0",
+	"author": [
+		"Dror S. [FFS] ([http://www.kolzchut.org.il Kol-Zchut])"
+	],
+	"url": "https://github.com/kolzchut/mediawiki-extensions-Reports",
+	"descriptionmsg": "reports-desc",
+	"license-name": "GPL-2.0-or-late",
+	"type": "other",
+	"requires": {
+		"extensions": {
+			"AdditionalFormInputs": ">=0.3.0"
+		}
+	},
+	"SpecialPages": {
+		"ArticlesUpdatesReport": "SpecialArticlesUpdatesReport"
+	},
+	"AutoloadClasses": {
+		"SpecialArticlesUpdatesReport": "SpecialArticlesUpdatesReport.php"
+	},
+	"config": {
+	},
+	"Hooks": {
+	},
+	"AvailableRights": [
+		"viewreports"
+	],
+	"GroupPermissions": {
+		"staff": {
+			"viewreports": true
+		}
+	},
+	"MessagesDirs": {
+		"Reports": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"ReportsAlias": "Reports.alias.php"
+	},
+	"manifest_version": 2
+}

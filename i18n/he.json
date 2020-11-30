@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dror S."
+		]
+	},
+	"right-viewreports": "רשות לצפות בדפי דו\"חות",
+	"articlesupdatesreport": "דו\"ח עדכוני ערכים",
+	"reports-field-from": "מתאריך",
+	"reports-field-to": "עד תאריך",
+	"reports-field-category": "קטגוריה",
+	"reports-submit-btn": "שליחה",
+	"reports-missingparam-at-least-one-of": "דרוש {{PLURAL:$2|הפרמטר|לפחות אחד מהפרמטרים:}} $1.",
+	"reports-number-of-articles-updated": "מספר הערכים שעודכנו: $1"
+}

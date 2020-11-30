@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dror S."
+		]
+	},
+	"reports-desc": "{{desc|name=Reports|url=https://github.com/kolzchut/mediawiki-extensions-Reports}}",
+	"right-viewreports": "{{doc-right|viewreports}}",
+	"articlesupdatesreport": "Special page name",
+	"reports-field-from": "Form field",
+	"reports-field-to": "Form field",
+	"reports-field-category": "Form field for category selection",
+	"reports-submit-btn": "Form submit button",
+	"reports-missingparam-at-least-one-of": "Missing params"
+}
