@@ -4,15 +4,15 @@ $specialPageAliases = [];
 
 /** English (English) */
 $specialPageAliases['en'] = [
-	'ArticlesUpdatesReport' => [ 'ArticlesUpdatesReport', 'Articles Updates Report' ],
+	'ArticlesUpdatesReport' => [ 'ArticlesUpdatesReport', 'Articles Updates Report' ]
 ];
 
 /** Hebrew (עברית) */
 $specialPageAliases['he'] = [
-	'ArticlesUpdatesReport' => [ 'דו"ח עדכוני ערכים' ],
+	'ArticlesUpdatesReport' => [ 'דו"ח עדכוני ערכים' ]
 ];
 
 /** Arabic (العربية) */
 $specialPageAliases['ar'] = [
-	// 'MajorChangesLog' => [],
+	'ArticlesUpdatesReport' => [ 'דו"ח עדכוני ערכים' ]
 ];
