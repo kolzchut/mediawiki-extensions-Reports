@@ -99,8 +99,14 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 		$this->conds[] = 'revision.rev_parent_id != 0';
 		$this->conds[] = 'revision.rev_user NOT IN (' . $usersToIgnoreQuery . ')';
 
-		$this->joinConds['page'] = [ 'LEFT JOIN', 'rev_page=page_id' ];
+		// Make sure this is not a replacetext edit - because we want to exclude mass edits here
+		// Try to make this apply to multiple language (he, ar, en) by exploding the edit summary
+		$msgText = $this->msg( 'replacetext_editsummary' )->text();
+		$msgText = strtok( $msgText, '-–' );
+		$this->conds[] = 'rev_comment NOT' . $dbr->buildLike( $msgText, $dbr->anyString() );
 
+
+		$this->joinConds['page'] = [ 'LEFT JOIN', 'rev_page=page_id' ];
 		$this->options[ 'GROUP BY'] = 'title';
 
 		$result = $dbr->select(
