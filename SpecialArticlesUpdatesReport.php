@@ -72,7 +72,7 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 	 * @return \Wikimedia\Rdbms\Database
 	 */
 	private function getDB() {
-		return $this->mDb ?: wfGetDB( DB_REPLICA );
+		return $this->mDb ?? wfGetDB( DB_REPLICA );
 	}
 
 	/**
@@ -82,10 +82,10 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 	 * @throws Exception
 	 */
 	protected function getCount( $data ) {
-		$dbr = $this->getDB();
-		$usersToIgnoreQuery = $this->getSubqueryIgnoredUsers();
-		$this->tables = [ 'revision', 'page' ];
-		$this->fields = [
+		$dbr                 = $this->getDB();
+		$actorsToIgnoreQuery = $this->getSubqueryIgnoredActors();
+		$this->tables        = [ 'revision', 'page' ];
+		$this->fields        = [
 			'title' => 'page_title',
 			'last_revision' => 'MAX(revision.rev_timestamp)',
 		];
@@ -97,25 +97,29 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 		$this->conds[ 'page.page_is_redirect' ] = 0;
 		// We want updates, not creation of articles
 		$this->conds[] = 'revision.rev_parent_id != 0';
-		$this->conds[] = 'revision.rev_user NOT IN (' . $usersToIgnoreQuery . ')';
 
 		// Make sure this is not a replacetext edit - because we want to exclude mass edits here
 		// Try to make this apply to multiple language (he, ar, en) by exploding the edit summary
 		$msgText = $this->msg( 'replacetext_editsummary' )->text();
 		$msgText = strtok( $msgText, '-–' );
-		$this->conds[] = 'rev_comment NOT' . $dbr->buildLike( $msgText, $dbr->anyString() );
+		$commentStore = MediaWikiServices::getInstance()->getCommentStore();
+		$commentQuery = $commentStore->getJoin( 'rev_comment' );
+		$this->conds[] = 'comment_text NOT' . $dbr->buildLike( $msgText, $dbr->anyString() );
 
+		// Ignore edits by certain users
+		$actorQuery = ActorMigration::newMigration()->getJoin( 'rev_user' );
+		$this->conds[] = 'revactor_actor NOT IN (' . $actorsToIgnoreQuery . ')';
 
 		$this->joinConds['page'] = [ 'LEFT JOIN', 'rev_page=page_id' ];
 		$this->options[ 'GROUP BY'] = 'title';
 
 		$result = $dbr->select(
-			$this->tables,
-			$this->fields,
+			$this->tables + $commentQuery['tables'] + $actorQuery['tables'],
+			$this->fields + $commentQuery['fields'] + $actorQuery['fields'],
 			$this->conds,
 			__METHOD__,
 			$this->options,
-			$this->joinConds
+			$this->joinConds + $commentQuery['joins'] + $actorQuery['joins']
 		);
 
 		return $result->numRows();
@@ -124,18 +128,18 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 	/**
 	 * @return string SQL subquery
 	 */
-	protected function getSubqueryIgnoredUsers() {
-		global $wgWrMainRepo, $wgWikiList;
-		$mainRepoDB = $wgWikiList[ $wgWrMainRepo ][ 'wgDBname' ];
-		$dbr = wfGetDB( DB_REPLICA, [], $mainRepoDB );
+	protected function getSubqueryIgnoredActors() {
+		$dbr = wfGetDB( DB_REPLICA );
 
 		$nonHumanGroups = [ 'automaton' ];
+
 		return $dbr->selectSQLText(
-			'user_groups',
-			'ug_user',
+			[ 'user_groups', 'actor' ],
+			'actor_id',
 			[ 'ug_group' => $nonHumanGroups ],
 			__METHOD__,
-			[ 'GROUP BY' => [ 'ug_user' ] ]
+			[ 'GROUP BY' => [ 'actor_id' ] ],
+			[ 'actor' => [ 'JOIN', 'actor_user = ug_user' ] ]
 		);
 	}
 
@@ -209,7 +213,7 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 	}
 
 	/**
-	 * Copied from ApiBase::parameterNotEmpty()
+	 * Based on the private ApiBase::parameterNotEmpty(), but adding a check for an empty string
 	 *
 	 * Callback function used in requireOnlyOneParameter to check whether required parameters are set
 	 *

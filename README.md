@@ -15,6 +15,8 @@ Special pages:
 
 
 ## Changelog
+### 0.1.1 [2021-06-24]
+Attempt to fix ArticlesUpdatedReport for MediaWiki 1.35, by using ActorMigration & CommentStore for queries
 
-### 0.0.1 [2020-11-01]
+### 0.1.0 [2020-11-01]
 initial version

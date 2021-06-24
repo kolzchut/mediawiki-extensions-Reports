@@ -1,6 +1,6 @@
 {
 	"name": "Reports",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": [
 		"Dror S. [FFS] ([http://www.kolzchut.org.il Kol-Zchut])"
 	],
@@ -9,6 +9,7 @@
 	"license-name": "GPL-2.0-or-late",
 	"type": "other",
 	"requires": {
+		"MediaWiki": ">= 1.35.0",
 		"extensions": {
 			"AdditionalFormInputs": ">=0.3.0"
 		}
