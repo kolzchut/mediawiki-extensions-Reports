@@ -20,10 +20,6 @@
 	"AutoloadClasses": {
 		"SpecialArticlesUpdatesReport": "SpecialArticlesUpdatesReport.php"
 	},
-	"config": {
-	},
-	"Hooks": {
-	},
 	"AvailableRights": [
 		"viewreports"
 	],
