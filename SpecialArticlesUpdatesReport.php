@@ -148,19 +148,17 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 	 */
 	protected function limitByDates( $data ) {
 		$db = $this->getDB();
-		$fromDate = $data[ 'from' ];
-		$toDate = $data[ 'to' ];
+		$from = $data[ 'from' ];
+		$to = $data[ 'to' ];
+		$fieldName = 'rev_timestamp';
 
-		if ( $fromDate ) {
-			$this->conds[] = 'rev_timestamp >= ' .
-					   $db->addQuotes( $db->timestamp( new DateTime( $fromDate ) ) );
+		if ( !empty( $from ) ) {
+			$this->conds[] = $fieldName . ' >= ' . $db->addQuotes( $db->timestamp( new DateTime( $from ) ) );
 		}
-		if ( $toDate ) {
+		if ( !empty( $to ) ) {
 			// Add 1 day, so we check for "any date before tomorrow"
-			$this->conds[] = 'rev_timestamp < ' .
-					   $db->addQuotes(
-						   $db->timestamp( new DateTime( $toDate . ' +1 day' ) )
-					   );
+			$to = $db->timestamp( new DateTime( $to . ' +1 day' ) );
+			$this->conds[] = $fieldName . ' < ' . $db->addQuotes( $to );
 		}
 	}
 
