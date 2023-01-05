@@ -40,7 +40,7 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 				'label-message' => 'reports-field-to'
 			],
 			'category' => [
-				'class' => 'HTMLTitleTextFieldFixed',
+				'class' => 'HTMLTitleTextField',
 				'name' => 'category',
 				'label-message' => 'reports-field-category',
 				'namespace' => NS_CATEGORY,
