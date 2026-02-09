@@ -6,10 +6,17 @@
 	},
 	"right-viewreports": "רשות לצפות בדפי דו\"חות",
 	"articlesupdatesreport": "דו\"ח עדכוני ערכים",
+	"reports-form-legend": "פרמטרי הדו\"ח",
 	"reports-field-from": "מתאריך",
 	"reports-field-to": "עד תאריך",
 	"reports-field-category": "קטגוריה",
+	"reports-field-debug": "הצג פרטי עורכים",
+	"reports-field-debug-help": "הצג רשימת עורכים שביצעו את העדכונים (שאילתה איטית יותר)",
 	"reports-submit-btn": "שליחה",
 	"reports-missingparam-at-least-one-of": "דרוש {{PLURAL:$2|הפרמטר|לפחות אחד מהפרמטרים:}} $1.",
-	"reports-number-of-articles-updated": "מספר הערכים שעודכנו: $1"
+	"reports-number-of-articles-updated": "מספר הערכים שעודכנו: $1",
+	"reports-debug-editor-details": "ניפוי באגים: פרטי עורכים",
+	"reports-distinct-users": "משתמשים ייחודיים",
+	"reports-people-and-bots": "$1 {{PLURAL:$1|אדם|אנשים}}, $2 {{PLURAL:$2|בוט|בוטים}} (לא נכללו)",
+	"reports-names": "שמות"
 }

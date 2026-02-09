@@ -1,0 +1,29 @@
+/**
+ * Styles for Special:ArticlesUpdatesReport
+ */
+
+/* Main result box */
+.reports-result-box {
+	border: 2px solid #3366cc;
+	background-color: #f0f8ff;
+	margin: 20px 0;
+	padding: 15px;
+	font-size: 1.2em;
+	border-radius: 5px;
+}
+
+/* Debug section container */
+.reports-debug-section {
+	margin-top: 20px;
+}
+
+/* Editor names list - 3 column layout */
+.reports-editor-list {
+	column-count: 3;
+	column-gap: 20px;
+}
+
+/* Prevent items from breaking across columns */
+.reports-editor-list li {
+	break-inside: avoid;
+}

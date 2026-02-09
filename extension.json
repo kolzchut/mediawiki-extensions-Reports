@@ -1,8 +1,8 @@
 {
 	"name": "Reports",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"author": [
-		"Dror S. [FFS] ([http://www.kolzchut.org.il Kol-Zchut])"
+		"Dror S. [FFS] ([https://www.kolzchut.org.il Kol-Zchut])"
 	],
 	"url": "https://github.com/kolzchut/mediawiki-extensions-Reports",
 	"descriptionmsg": "reports-desc",
@@ -32,6 +32,17 @@
 	},
 	"ExtensionMessagesFiles": {
 		"ReportsAlias": "Reports.alias.php"
+	},
+	"ResourceModules": {
+		"ext.wikirights.reports": {
+			"styles": [
+				"modules/ext.wikirights.reports.css"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "WikiRights/Reports"
 	},
 	"manifest_version": 2
 }

@@ -7,9 +7,17 @@
 	"reports-desc": "Adds a shortcut to adding a \"major change\" revision tag to the latest revision of an article",
 	"right-viewreports": "Allow viewing special report pages",
 	"articlesupdatesreport": "Articles Updates Report",
+	"reports-form-legend": "Report Parameters",
 	"reports-field-from": "From",
 	"reports-field-to": "To",
 	"reports-field-category": "Category",
+	"reports-field-debug": "Show editor details",
+	"reports-field-debug-help": "Display a list of editors who made the updates (slower query)",
 	"reports-submit-btn": "Send",
 	"reports-missingparam-at-least-one-of": "{{PLURAL:$2|The parameter|At least one of the parameters:}} $1 is required.",
-	"reports-number-of-articles-updated": "Number of articles updated: $1"}
+	"reports-number-of-articles-updated": "Number of articles updated: $1",
+	"reports-debug-editor-details": "Debug: Editor Details",
+	"reports-distinct-users": "Distinct Users",
+	"reports-people-and-bots": "$1 {{PLURAL:$1|person|people}}, $2 {{PLURAL:$2|bot|bots}} (excluded)",
+	"reports-names": "Names"
+}

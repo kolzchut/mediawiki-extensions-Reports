@@ -15,6 +15,15 @@ Special pages:
 
 
 ## Changelog
+### 0.2.0 [2025-02-09]
+Major improvements to ArticlesUpdatedReport:
+- **Fixed critical bug**: Bot filtering now works correctly by selecting `actor_user` instead of `actor_id` in subquery
+- **Fixed SQL injection vulnerability** in category filter using proper DB escaping
+- **Fixed actor migration compatibility** for MediaWiki 1.35 by using dynamic field names
+- **Optimized query performance** using `COUNT(DISTINCT rev_page)` instead of fetching all rows
+- **Added debug mode**: Optional checkbox to display editor details with bot exclusion verification
+- **Improved UX**: Collapsible form that persists after submission for easy parameter adjustments
+
 ### 0.1.1 [2021-06-24]
 Attempt to fix ArticlesUpdatedReport for MediaWiki 1.35, by using ActorMigration & CommentStore for queries
 
