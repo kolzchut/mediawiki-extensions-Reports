@@ -10,6 +10,8 @@
 	"reports-field-from": "Form field",
 	"reports-field-to": "Form field",
 	"reports-field-category": "Form field for category selection",
+	"reports-field-ignoreusers": "Form field for selecting users to ignore",
+	"reports-field-ignoreusers-help": "Help text for the ignore users field",
 	"reports-submit-btn": "Form submit button",
 	"reports-missingparam-at-least-one-of": "Missing params"
 }

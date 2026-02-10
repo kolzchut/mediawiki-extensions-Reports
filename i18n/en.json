@@ -11,6 +11,8 @@
 	"reports-field-from": "From",
 	"reports-field-to": "To",
 	"reports-field-category": "Category",
+	"reports-field-ignoreusers": "Ignore users",
+	"reports-field-ignoreusers-help": "Additional users to ignore (besides bots). Select multiple users to exclude their edits from the report.",
 	"reports-field-debug": "Show editor details",
 	"reports-field-debug-help": "Display a list of editors who made the updates (slower query)",
 	"reports-submit-btn": "Send",

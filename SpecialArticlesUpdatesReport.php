@@ -90,6 +90,15 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 				'required' => false,
 				// 'validation-callback' => [ $this, 'validateCategoryField' ],
 			],
+			'ignoreusers' => [
+				'class' => 'HTMLUsersMultiselectField',
+				'name' => 'ignoreusers',
+				'label-message' => 'reports-field-ignoreusers',
+				'help-message' => 'reports-field-ignoreusers-help',
+				'exists' => false,
+				'ipallowed' => false,
+				'required' => false,
+			],
 			'debug' => [
 				'type' => 'check',
 				'name' => 'debug',
@@ -139,6 +148,18 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 				foreach ( $ignoredActors as $actor ) {
 					$botNames[] = $actor->actor_name;
 				}
+
+				// Add additional users from the form field
+				if ( !empty( $data['ignoreusers'] ) ) {
+					$additionalUsers = explode( "\n", $data['ignoreusers'] );
+					foreach ( $additionalUsers as $username ) {
+						$username = trim( $username );
+						if ( $username !== '' ) {
+							$botNames[] = $username;
+						}
+					}
+				}
+
 				$botNamesSet = array_flip( $botNames );
 
 				// Separate editors into humans and bots
@@ -200,7 +221,14 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 	 */
 	protected function getCount( $data ) {
 		$dbr = $this->getDB();
-		$actorsToIgnoreQuery = $this->getSubqueryIgnoredActors();
+
+		// Parse ignoreusers field (comes as newline-separated string)
+		$additionalUsers = [];
+		if ( !empty( $data['ignoreusers'] ) ) {
+			$additionalUsers = explode( "\n", $data['ignoreusers'] );
+		}
+
+		$actorsToIgnoreQuery = $this->getSubqueryIgnoredActors( $additionalUsers );
 
 		$this->tables = [ 'revision', 'page' ];
 		$this->fields = [
@@ -256,7 +284,14 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 	 */
 	protected function getDistinctEditors( $data, $excludeBots = true ) {
 		$dbr = $this->getDB();
-		$actorsToIgnoreQuery = $this->getSubqueryIgnoredActors();
+
+		// Parse ignoreusers field (comes as newline-separated string)
+		$additionalUsers = [];
+		if ( !empty( $data['ignoreusers'] ) ) {
+			$additionalUsers = explode( "\n", $data['ignoreusers'] );
+		}
+
+		$actorsToIgnoreQuery = $this->getSubqueryIgnoredActors( $additionalUsers );
 
 		$this->tables = [ 'revision', 'page' ];
 		$this->fields = [
@@ -312,20 +347,42 @@ class SpecialArticlesUpdatesReport extends FormSpecialPage {
 	}
 
 	/**
+	 * @param array $additionalUsers Array of additional usernames to ignore
 	 * @return string SQL subquery
 	 */
-	protected function getSubqueryIgnoredActors() {
+	protected function getSubqueryIgnoredActors( $additionalUsers = [] ) {
 		$dbr = wfGetDB( DB_REPLICA );
 
 		$nonHumanGroups = [ 'automaton' ];
 
+		$conds = [ 'ug_group' => $nonHumanGroups ];
+
+		// If additional users are provided, add them to the conditions
+		if ( !empty( $additionalUsers ) ) {
+			$actorNames = [];
+			foreach ( $additionalUsers as $username ) {
+				$username = trim( $username );
+				if ( $username !== '' ) {
+					$actorNames[] = $username;
+				}
+			}
+
+			if ( !empty( $actorNames ) ) {
+				// Use OR condition to include both group members and specific users
+				$conds = $dbr->makeList( [
+					'ug_group' => $nonHumanGroups,
+					'actor_name' => $actorNames
+				], LIST_OR );
+			}
+		}
+
 		return $dbr->selectSQLText(
 			[ 'user_groups', 'actor' ],
 			'actor_user',
-			[ 'ug_group' => $nonHumanGroups ],
+			$conds,
 			__METHOD__,
 			[ 'GROUP BY' => [ 'actor_user' ] ],
-			[ 'actor' => [ 'JOIN', 'actor_user = ug_user' ] ]
+			[ 'actor' => [ 'LEFT JOIN', 'actor_user = ug_user' ] ]
 		);
 	}
 

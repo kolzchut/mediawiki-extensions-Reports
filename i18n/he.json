@@ -10,6 +10,8 @@
 	"reports-field-from": "מתאריך",
 	"reports-field-to": "עד תאריך",
 	"reports-field-category": "קטגוריה",
+	"reports-field-ignoreusers": "משתמשים שלא לכלול",
+	"reports-field-ignoreusers-help": "משתמשים נוספים להתעלם מהם (מעבר לבוטים). בחר מספר משתמשים כדי להוציא את עריכותיהם מהדו\"ח.",
 	"reports-field-debug": "הצג פרטי עורכים",
 	"reports-field-debug-help": "הצג רשימת עורכים שביצעו את העדכונים (שאילתה איטית יותר)",
 	"reports-submit-btn": "שליחה",

@@ -15,6 +15,13 @@ Special pages:
 
 
 ## Changelog
+### 0.2.1 [2026-02-10]
+- **Added ignore users feature**: New multiselect field to temporarily exclude specific users from report
+  - Uses built-in `HTMLUsersMultiselectField` with username autocomplete
+  - Works alongside automatic bot exclusion
+  - Excluded users are shown in debug mode
+  - Fully internationalized (English & Hebrew)
+
 ### 0.2.0 [2025-02-09]
 Major improvements to ArticlesUpdatedReport:
 - **Fixed critical bug**: Bot filtering now works correctly by selecting `actor_user` instead of `actor_id` in subquery
