@@ -1,21 +1,28 @@
 {
-	"name": "Reports",
-	"version": "0.2.0",
+	"name": "KolzchutReports",
+	"version": "0.2.2",
 	"author": [
 		"Dror S. [FFS] ([https://www.kolzchut.org.il Kol-Zchut])"
 	],
 	"url": "https://github.com/kolzchut/mediawiki-extensions-Reports",
 	"descriptionmsg": "reports-desc",
-	"license-name": "GPL-2.0-or-late",
+	"license-name": "GPL-2.0-or-later",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.35.0"
+		"MediaWiki": ">= 1.43.0"
 	},
 	"SpecialPages": {
-		"ArticlesUpdatesReport": "SpecialArticlesUpdatesReport"
+		"ArticlesUpdatesReport": {
+			"class": "MediaWiki\\Extension\\KolzchutReports\\SpecialArticlesUpdatesReport",
+			"services": [
+				"ConnectionProvider",
+				"CommentStore",
+				"TitleParser"
+			]
+		}
 	},
-	"AutoloadClasses": {
-		"SpecialArticlesUpdatesReport": "SpecialArticlesUpdatesReport.php"
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\KolzchutReports\\": "includes/"
 	},
 	"AvailableRights": [
 		"viewreports"
@@ -26,12 +33,12 @@
 		}
 	},
 	"MessagesDirs": {
-		"Reports": [
+		"KolzchutReports": [
 			"i18n"
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"ReportsAlias": "Reports.alias.php"
+		"KolzchutReportsAlias": "Reports.alias.php"
 	},
 	"ResourceModules": {
 		"ext.wikirights.reports": {

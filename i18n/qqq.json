@@ -4,14 +4,22 @@
 			"Dror S."
 		]
 	},
-	"reports-desc": "{{desc|name=Reports|url=https://github.com/kolzchut/mediawiki-extensions-Reports}}",
+	"reports-desc": "{{desc|name=KolzchutReports|url=https://github.com/kolzchut/mediawiki-extensions-Reports}}",
 	"right-viewreports": "{{doc-right|viewreports}}",
 	"articlesupdatesreport": "Special page name",
-	"reports-field-from": "Form field",
-	"reports-field-to": "Form field",
+	"reports-form-legend": "Legend/title of the report parameters form",
+	"reports-field-from": "Form field: start date",
+	"reports-field-to": "Form field: end date",
 	"reports-field-category": "Form field for category selection",
 	"reports-field-ignoreusers": "Form field for selecting users to ignore",
 	"reports-field-ignoreusers-help": "Help text for the ignore users field",
+	"reports-field-debug": "Form checkbox to enable debug/editor-details mode",
+	"reports-field-debug-help": "Help text for the debug checkbox",
 	"reports-submit-btn": "Form submit button",
-	"reports-missingparam-at-least-one-of": "Missing params"
+	"reports-missingparam-at-least-one-of": "Missing params",
+	"reports-number-of-articles-updated": "Result message showing the count of updated articles. $1 is the number of articles.",
+	"reports-debug-editor-details": "Heading for the debug section showing editor details",
+	"reports-distinct-users": "Label for the distinct user count in debug mode",
+	"reports-people-and-bots": "Summary of human and bot editors. $1 = number of human editors, $2 = number of bots.",
+	"reports-names": "Label before the list of editor names"
 }
